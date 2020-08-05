@@ -77,6 +77,35 @@ def AI_make_a_guess(board, previous_guesses = [], hit = False):
         if next_guess[1] > N - 1:
             next_guess[1] -= 1
 
+        #make sure that it's not a previous guess
+        #this we'll keep generating new random guesses as long as we've guessed them before, loop will break with new guess
+        while next_guess in previous_guesses:
+          #now generate a new guess based on last guess. The next two lines determine if we're going to move up/down the row and column from the last guess
+          row_move = random.randint(-1,1)
+          col_move = random.randint(-1,1)
+
+          #make sure that both row and column move are not 0 (i.e., [0,0]). Otherwise we'd make the same guess again!
+          while col_move == 0 and row_move == 0:
+              row_move = random.randint(-1,1)
+              col_move = random.randint(-1,1)
+
+          #now we update our next guess as the sum of the row_move and col_move with our previous guess
+          next_guess = [last_guess[0] + row_move, last_guess[1] + col_move]
+
+                  #we need to make sure that our next guess doesn't take us off of the board!
+          #for the row
+          if next_guess[0] < 0:
+              next_guess[0] += 1
+          if next_guess[0] > N - 1:
+              next_guess[0] -= 1
+
+          #for the column
+          if next_guess[1] < 0:
+              next_guess[1] += 1
+          if next_guess[1] > N - 1:
+              next_guess[1] -= 1
+
+
     #now we add next_guess to our previous previous_guesses
     previous_guesses.append(next_guess)
 
