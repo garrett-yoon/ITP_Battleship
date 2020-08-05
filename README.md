@@ -14,3 +14,6 @@ Outlined To-Do-List:
 8.	Have the AI opponent make a guess, update player on if the AI made a hit or miss
 9.	Display the updated boards
 10.	Repeat steps 5 - 9 until the game is lost/won
+
+# Files  
++ AI_opponent.py: contains functions for the AI player, to be called into main.yp  
