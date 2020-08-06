@@ -68,31 +68,28 @@ def AI_make_a_guess(board, previous_guesses = [], hit = False):
 
 def guess_prev_hit(board, previous_guesses, last_guess):
 
+    # Get length of board
     N = len(board)
 
-    #randomly generate 0, -1, or 1
-    row_move = random.randint(-1,1)
-    col_move = random.randint(-1,1)
+    # List of all adjacent positions
+    combos = ([0,1], [1,0], [-1,0], [0,-1])
 
-    #make sure that both row and column move are not 0 (i.e., [0,0]). Otherwise we'd make the same guess again!
-    while col_move == 0 and row_move == 0:
-        row_move = random.randint(-1,1)
-        col_move = random.randint(-1,1)
+    # 
+    validGuess = False
 
-    #now we update our next guess as the sum of the row_move and col_move with our previous guess
-    next_guess = [last_guess[0] + row_move, last_guess[1] + col_move]
+    while validGuess == False:
 
-    #we need to make sure that our next guess doesn't take us off of the board!
-    #for the row
-    if next_guess[0] < 0:
-        next_guess[0] += 1
-    if next_guess[0] > N - 1:
-        next_guess[0] -= 1
+        #randomly generate a column/row movement
+        movement = combos[random.randint(0,3)]
 
-    #for the column
-    if next_guess[1] < 0:
-        next_guess[1] += 1
-    if next_guess[1] > N - 1:
-        next_guess[1] -= 1
+        #now we update our next guess 
+        next_guess = [last_guess[0] + movement[0], last_guess[1] + movement[1]]
 
+        #checks if guess is valid (within the range of 0 to N-1)
+        if next_guess[0] >= 0 and next_guess[1] <= N - 1:
+            validGuess = True
+
+    # return the next guess
     return next_guess
+
+
