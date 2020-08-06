@@ -4,7 +4,7 @@ This file will contain all of the functions necessary for the AI Player.
 
 ----FUNCTIONS----
 AI_make_a_guess: will make a guess to target the player's battleship
-
+guess_prev_hit: a support function for AI_make_a_guess in the case that the AI guessed correctly last time
 '''
 
 #import relevant packages
@@ -59,7 +59,7 @@ def AI_make_a_guess(board, previous_guesses = [], hit = False):
         #this we'll keep generating new random guesses as long as we've guessed them before, loop will break with new guess
         while next_guess in previous_guesses:
             next_guess = guess_prev_hit(board, previous_guesses, last_guess)
-          
+
     #now we add next_guess to our previous previous_guesses
     previous_guesses.append(next_guess)
 
@@ -67,14 +67,22 @@ def AI_make_a_guess(board, previous_guesses = [], hit = False):
     return next_guess, previous_guesses
 
 def guess_prev_hit(board, previous_guesses, last_guess):
-
+    '''
+    DESCRIPTION: a function to support AI_make_a_guess in the situation that the AI's last guess was a hit
+    INPUTS (data types):
+        board (list of lists) : the grid used to play the game
+        previous_guesses (list of lists): a list of the AI's previous guesses, defaults to empty list if the start of a new game
+        last_guess (list with two elements): the AI's last guess, of the form [row, column]
+    OUTPUTS (data types):
+        next_guess (list with two elements): the AI's next guess. Will give guess in the form of [row, column].
+        '''
     # Get length of board
     N = len(board)
 
     # List of all adjacent positions
     combos = ([0,1], [1,0], [-1,0], [0,-1])
 
-    # 
+    #
     validGuess = False
 
     while validGuess == False:
@@ -82,7 +90,7 @@ def guess_prev_hit(board, previous_guesses, last_guess):
         #randomly generate a column/row movement
         movement = combos[random.randint(0,3)]
 
-        #now we update our next guess 
+        #now we update our next guess
         next_guess = [last_guess[0] + movement[0], last_guess[1] + movement[1]]
 
         #checks if guess is valid (within the range of 0 to N-1)
@@ -91,5 +99,3 @@ def guess_prev_hit(board, previous_guesses, last_guess):
 
     # return the next guess
     return next_guess
-
-
