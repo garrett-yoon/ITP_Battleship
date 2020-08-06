@@ -30,7 +30,7 @@ def user_placement(board, ships):
         print("Invalid ship placement. Please try again.")
         input("Press ENTER to continue")
     board = place_ship(board,ships[ship],ship[0],x,y,orientation)
-    print_board(board)
+  print_board(board)
   print("Ships stationed successfully.")
   return board
 
@@ -47,7 +47,7 @@ def comp_placement(board, ships):
         orientation = "h"
       valid = validate(board,ships[ship],x,y,orientation)
     board = place_ship(board,ships[ship],ship[0],x,y,orientation)
-  print("Ships stationed successfully.")
+  print("Computer's ships stationed successfully.")
   return board
 
 def place_ship(board, ship, c, x, y, orientation):
@@ -144,18 +144,19 @@ def comp_move(board):
 			return board
 
 def check_sink(board,x,y):
-	if board[x][y] == "B":
-		ship = "Battleship"
-	elif board[x][y] == "S":
-		ship = "Submarine"
-	elif board[x][y] == "D":
-		ship = "Destroyer"
-	elif board[x][y] == "P":
-		ship = "Patrol Boat"
-
-	board[-1][ship] -= 1
-	if board[-1][ship] == 0:
-		print(ship + " sunk")
+  if board[x][y] == "B":
+    ship = "Battleship"
+  elif board[x][y] == "S":
+    ship = "Submarine"
+  elif board[x][y] == "D":
+    ship = "Destroyer"
+  elif board[x][y] == "P":
+    ship = "Patrol Boat"
+  else:
+    return False
+  board[-1][ship] -= 1
+  if board[-1][ship] == 0:
+    print(ship + " sunk")
 
 
 def check_win(board):
