@@ -161,7 +161,7 @@ def check_sink(board,x,y):
 def check_win(board):
 	for i in range(8):
 		for j in range(8):
-			if board[i][j] != -1 and board[i][j] != '*' and board[i][j] != '$':
+			if board[i][j] != "-" and board[i][j] != '*' and board[i][j] != '$':
 				return False
 	return True
 
@@ -200,7 +200,7 @@ board = []
 for i in range(n):
 	board_row = []
 	for j in range(n):
-		board_row.append(-1)
+		board_row.append("-")
 	board.append(board_row)
 
 board_P1 = copy.deepcopy(board)
