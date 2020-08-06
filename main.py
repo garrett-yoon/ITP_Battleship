@@ -46,9 +46,6 @@ def comp_placement(board, ships):
       else:
         orientation = "h"
       valid = validate(board,ships[ship],x,y,orientation)
-      if not valid:
-        print("Invalid ship placement. Please try again.")
-        input("Press ENTER to continue")
     board = place_ship(board,ships[ship],ship[0],x,y,orientation)
   print("Ships stationed successfully.")
   return board
@@ -56,10 +53,10 @@ def comp_placement(board, ships):
 def place_ship(board, ship, c, x, y, orientation):
   if orientation == "v":
     for i in range(ship):
-      board[x+i][y]==c
+      board[x+i][y]=c
   elif orientation == "h":
     for i in range(ship):
-      board[x][y+i]==c
+      board[x][y+i]=c
   return board
 
 def validate(board, ship, x, y, orientation):
@@ -70,11 +67,11 @@ def validate(board, ship, x, y, orientation):
   else:
     if orientation == "v":
       for i in range(ship):
-        if board[x+i][y] != -1:
+        if board[x+i][y] != '-':
           return False
     elif orientation == "h":
       for i in range(ship):
-        if board[x][y+i] != -1:
+        if board[x][y+i] != '-':
           return False
   return True
 
@@ -104,7 +101,7 @@ def get_coords():
 			print(e)
 
 def make_move(board,x,y):
-	if board[x][y] == -1:
+	if board[x][y] == '-':
 		return "miss"
 	elif board[x][y] == '*' or board[x][y] == '$':
 		return "try again"
@@ -222,12 +219,13 @@ while mode!=3:
       print("YOU WIN!! Thanks for playing!")
       break
     print_board(board_P2)
+    print("-----------------------")
+    print_board(board_P1)
     input("Hit ENTER to end turn.")
     board_P1 = comp_move(board_P1)
     if board_P1=="WIN":
       print("You Lost!! Try again next time!")
       break
-    print_board(board_P2)
     input("Hit ENTER to end turn.")
   elif mode == 2:
     print("game mode {}".format(mode))
