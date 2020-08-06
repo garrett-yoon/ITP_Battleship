@@ -1,6 +1,7 @@
 # Initialize board
 
 from AI_opponent import AI_make_a_guess, guess_prev_hit
+import copy
 def game_mode():
   while True:
     try:
@@ -77,7 +78,7 @@ def validate(board, ship, x, y, orientation):
           return False
   return True
 
-def v_or_h():
+def orient():
   while True:
     user_input = input("vertical or horizontal (v,h) ? ")
     if user_input == "v" or user_input == "h":
@@ -86,7 +87,7 @@ def v_or_h():
       print("Invalid input. Please only enter v or h.")
 
 def get_coords():
-	while (True):
+	while True:
 		user_input = input("Please enter coordinates (row,col) ? ")
 		try:
 			coords = user_input.split(",")
@@ -105,7 +106,7 @@ def get_coords():
 def make_move(board,x,y):
 	if board[x][y] == -1:
 		return "miss"
-	elif board[x][y] == 'o' or board[x][y] == '$':
+	elif board[x][y] == '*' or board[x][y] == '$':
 		return "try again"
 	else:
 		return "hit"
@@ -168,16 +169,21 @@ def check_win(board):
 	return True
 
 
-def single_player():
-  for line in board_P1:
-    print(line)
+# def single_player():
+#   for line in board_P1:
+#     print(line)
 
 
 n = 8
 
-board_P1 = [['o' for i in range(n)] for i in range(n)]
-board_P2 = [['o' for i in range(n)] for i in range(n)]
-ships = {'Patrol Boat': 2, 'Destroyer': 3, 'Submarine':3, 'Battleship':4}
+# board_P1 = [['o' for i in range(n)] for i in range(n)]
+# board_P2 = [['o' for i in range(n)] for i in range(n)]
+ships = {"Battleship":4,
+ 		     "Submarine":3,
+		     "Destroyer":3,
+		     "Patrol Boat":2}
+
+	#setup blank 8x8 board
 
 # comp_guesses = []
 
@@ -192,6 +198,22 @@ print("[1] Single Player")
 print("[2] 2-Player")
 print("[3] Exit")
 mode = game_mode()
+
+board = []
+for i in range(n):
+	board_row = []
+	for j in range(n):
+		board_row.append(-1)
+	board.append(board_row)
+
+board_P1 = copy.deepcopy(board)
+board_P2 = copy.deepcopy(board)
+board_P1.append(copy.deepcopy(ships))
+board_P2.append(copy.deepcopy(ships))
+
+#ship placement
+board_P1 = user_placement(board_P1,ships)
+board_P2 = comp_placement(board_P2,ships)
 
 while mode!=3:
   if mode == 1:
