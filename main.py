@@ -1,7 +1,7 @@
 # Initialize board
 
 from AI_opponent import AI_make_a_guess, guess_prev_hit
-import copy
+import copy, random
 def game_mode():
   while True:
     try:
@@ -217,7 +217,6 @@ board_P2 = comp_placement(board_P2,ships)
 
 while mode!=3:
   if mode == 1:
-    print_board(board_P2)
     board_P2 = user_move(board_P2)
     if board_P2=="WIN":
       print("YOU WIN!! Thanks for playing!")
