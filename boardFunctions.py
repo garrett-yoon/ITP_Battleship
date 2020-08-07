@@ -1,6 +1,12 @@
 import copy, random
 from time import sleep
 
+def welcome():
+  print("Welcome to Battleship!")
+  print("[1] Single Player")
+  print("[2] 2-Player")
+  print("[3] Exit")
+
 def game_mode():
   while True:
     try:
@@ -17,6 +23,13 @@ def game_mode():
 def print_board(board):
     for line in board:
       print(line)
+
+def print_blank_board(board):
+  for line in board:
+    if isinstance(line, list):
+      line = ['-' if i not in ['-', '*', '$'] else i for i in line]
+    print(line)
+
 
 def user_placement(board, ships):
   for ship in ships.keys():
@@ -48,6 +61,7 @@ def comp_placement(board, ships):
         orientation = "h"
       valid = validate(board,ships[ship],x,y,orientation)
     board = place_ship(board,ships[ship],ship[0],x,y,orientation)
+
   print("Computer's ships stationed successfully.")
   return board
 
@@ -119,11 +133,11 @@ def user_move(board):
         for i in range(len(s)):
             print(s[i], sep=' ', end=' ', flush=True); sleep(0.5)
         print('\n')
-        sleep(0.5)
+        sleep(0.3)
 
 
         if res == "hit":
-            print("Hit at " + str(x+1) + "," + str(y+1))
+            print("Success! Hit at " + str(x+1) + "," + str(y+1))
             check_sink(board,x,y)
             board[x][y] = '$'
             if check_win(board):
@@ -146,13 +160,13 @@ def comp_move(board):
         y = random.randint(1,8)-1
         res = make_move(board,x,y)
         if res == "hit":
-            print("Hit at " + str(x+1) + "," + str(y+1))
+            print("Haha! I hit your ship at " + str(x+1) + "," + str(y+1))
             check_sink(board,x,y)
             board[x][y] = '$'
             if check_win(board):
                 return "WIN"
         elif res == "miss":
-            print("Sorry, " + str(x+1) + "," + str(y+1) + " is a miss.")
+            print("Shoot, " + str(x+1) + "," + str(y+1) + " was a miss.")
             board[x][y] = "*"
         if res != "try again":
             return board
