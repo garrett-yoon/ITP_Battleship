@@ -15,7 +15,7 @@ ships = {"Battleship":4,
              "Submarine":3,
              "Destroyer":3,
              "Patrol Boat":2}
-             
+
 # Initialize Game Mode
 welcome()
 mode = ''
@@ -36,6 +36,9 @@ board_P2 = copy.deepcopy(board)
 board_P1.append(copy.deepcopy(ships))
 board_P2.append(copy.deepcopy(ships))
 
+
+
+
 if mode in [1,2]:
 
     #ship placement
@@ -44,7 +47,6 @@ if mode in [1,2]:
     print("-----------------------")
 
     while mode == 1:
-
 
         if board_P2=="WIN":
           print("YOU WIN!! Thanks for playing!")

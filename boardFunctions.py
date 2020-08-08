@@ -1,5 +1,6 @@
 import copy, random
 from time import sleep
+from AI_opponent import *
 
 def welcome():
   print("Welcome to Battleship!")
@@ -151,16 +152,21 @@ def user_move(board):
         if res != "try again":
             return board
 
-def comp_move(board):
+def comp_move(board, previous_guesses = [], hit = False):
     print("-----------------------")
     print("I'm thinking...")
     sleep(1)
     while True:
-        x = random.randint(1,8)-1
-        y = random.randint(1,8)-1
+        #x = random.randint(1,8)-1
+        #y = random.randint(1,8)-1
+        #use "smart" AI to make the next guess and keep track of AI's previous guesses
+        next_guess, previous_guesses = AI_make_a_guess(board, previous_guesses, hit)
+        x, y = next_guess
         res = make_move(board,x,y)
         if res == "hit":
             print("Haha! I hit your ship at " + str(x+1) + "," + str(y+1))
+            #create Boolean to keep track of AI's last move for next round of AI_make_a_guess
+            hit = True
             check_sink(board,x,y)
             board[x][y] = '$'
             if check_win(board):
@@ -168,8 +174,10 @@ def comp_move(board):
         elif res == "miss":
             print("Shoot, " + str(x+1) + "," + str(y+1) + " was a miss.")
             board[x][y] = "*"
+            #create Boolean to keep track of AI's last move for next round of AI_make_a_guess
+            hit = False
         if res != "try again":
-            return board
+            return board, previous_guesses, hit
 
 def check_sink(board,x,y):
   if board[x][y] == "B":

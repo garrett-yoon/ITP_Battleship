@@ -20,7 +20,7 @@ def AI_make_a_guess(board, previous_guesses = [], hit = False):
     OUTPUTS (data types):
         next_guess (list with two elements): the AI's next guess. Will give guess in the form of [row, column].
         previous_guesses: an updated list of previous guesses, with the next_guess appended [[row, column], [row, column], ...]
-        '''
+    '''
     #first let's make sure inputs are correct
     #the board should be a list
     assert type(board) == list, 'the board needs to be a list'
@@ -75,7 +75,7 @@ def guess_prev_hit(board, previous_guesses, last_guess):
         last_guess (list with two elements): the AI's last guess, of the form [row, column]
     OUTPUTS (data types):
         next_guess (list with two elements): the AI's next guess. Will give guess in the form of [row, column].
-        '''
+    '''
     # Get length of board
     N = len(board)
 
