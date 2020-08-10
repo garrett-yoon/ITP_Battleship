@@ -177,7 +177,7 @@ def comp_move(board, previous_guesses = [], hit = False):
             #create Boolean to keep track of AI's last move for next round of AI_make_a_guess
             hit = False
         if res != "try again":
-            return board, previous_guesses, hit
+            return board
 
 def check_sink(board,x,y):
   if board[x][y] == "B":
