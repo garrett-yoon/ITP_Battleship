@@ -43,12 +43,21 @@ if mode in [1,2]:
 
     #ship placement
     board_P1 = user_placement(board_P1,ships)
-    board_P2 = comp_placement(board_P2,ships)
+# <<<<<<< Updated upstream
+    # board_P2 = comp_placement(board_P2,ships)
     print("-----------------------")
-    #this initializes the list that the AI will use to keep track of its moves
-    previous_guesses = []
-    #this is the Boolean that the AI will use to remember if it guessed correctly in its last move
-    hit = False
+    if board_P1 == "exit":
+        mode = 3
+        print("Exiting Battleship.")
+# =======
+    if mode == 1:
+        board_P2 = comp_placement(board_P2,ships)
+        print("-----------------------")
+        #this initializes the list that the AI will use to keep track of its moves
+        previous_guesses = []
+        #this is the Boolean that the AI will use to remember if it guessed correctly in its last move
+        hit = False
+# >>>>>>> Stashed changes
     while mode == 1:
 
         if board_P2=="WIN":
@@ -59,16 +68,57 @@ if mode in [1,2]:
         print_board(board_P1)
         # input("Hit ENTER to end turn.")
         board_P2 = user_move(board_P2)
-        #incorporating previous_guesses and hit into the AI's moves so that it uses its memory from the previous move 
+        if board_P2 == "exit":
+            print("Exiting Battleship.")
+            break
+        
+        #incorporating previous_guesses and hit into the AI's moves so that it uses its memory from the previous move
         board_P1, previous_guesses, hit = comp_move(board_P1, previous_guesses , hit)
         print("-----------------------")
         if board_P1=="WIN":
           print("You Lost!! Try again next time!")
           break
         # input("Hit ENTER to end turn.")
-
+    if mode == 2:
+        print("-----------------------")
+        print("-----------------------")
+        print("Player 2 ship placement:")
+        board_P2 = user_placement(board_P2, ships)
     while mode == 2:
-        print("game mode {}".format(mode))
+
+        # Player 1's turn. Print blank P2 board and P1 board.
+        print("Player 1 guess:")
+        print("\n")
+        print("Player 2 board:")
+        print_blank_board(board_P2)
+        print("-----------------------")
+        print("Player 1 board:")
+        print_board(board_P1)
+
+        # Player 1's move and check if player 1 wins
+        board_P2 = user_move(board_P2)
+        if board_P2 == "exit":
+            print("Exiting Battleship.")
+            break
+        if board_P2 =="WIN":
+            print("Player 1 Wins!")
+
+        # Player 2's turn
+        print("Player 2 guess:")
+        print("\n")
+        print("Player 1 board:")
+        print_blank_board(board_P1)
+        print("-----------------------")
+        print("Player 2 board:")
+        print_board(board_P2)
+
+        # Player 2's move and check if win
+        board_P1 = user_move(board_P1)
+        if board_P1 == "exit":
+            print("Exiting Battleship.")
+            break
+        if board_P1 =="WIN":
+            print("Player 2 Wins!")
 
 
 elif mode == 3:
