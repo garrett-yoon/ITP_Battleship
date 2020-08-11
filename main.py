@@ -45,7 +45,10 @@ if mode in [1,2]:
     board_P1 = user_placement(board_P1,ships)
     board_P2 = comp_placement(board_P2,ships)
     print("-----------------------")
-
+    #this initializes the list that the AI will use to keep track of its moves
+    previous_guesses = []
+    #this is the Boolean that the AI will use to remember if it guessed correctly in its last move
+    hit = False
     while mode == 1:
 
         if board_P2=="WIN":
@@ -56,7 +59,8 @@ if mode in [1,2]:
         print_board(board_P1)
         # input("Hit ENTER to end turn.")
         board_P2 = user_move(board_P2)
-        board_P1 = comp_move(board_P1)
+        #incorporating previous_guesses and hit into the AI's moves so that it uses its memory from the previous move 
+        board_P1, previous_guesses, hit = comp_move(board_P1, previous_guesses , hit)
         print("-----------------------")
         if board_P1=="WIN":
           print("You Lost!! Try again next time!")
