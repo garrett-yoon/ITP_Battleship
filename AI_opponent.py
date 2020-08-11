@@ -20,7 +20,7 @@ def AI_make_a_guess(board, previous_guesses = [], hit = False):
     OUTPUTS (data types):
         next_guess (list with two elements): the AI's next guess. Will give guess in the form of [row, column].
         previous_guesses: an updated list of previous guesses, with the next_guess appended [[row, column], [row, column], ...]
-        '''
+    '''
     #first let's make sure inputs are correct
     #the board should be a list
     assert type(board) == list, 'the board needs to be a list'
@@ -40,12 +40,12 @@ def AI_make_a_guess(board, previous_guesses = [], hit = False):
 
         #now we'll make a random guess based on the board size, guess will be of form [row, column]
         #randint is a uniform distribution, we can change this if we want to get fancy with random distributions (Gaussian, etc.)
-        next_guess = [random.randint(0, N - 1), random.randint(0, N - 1)]
+        next_guess = [random.randint(0, N - 2), random.randint(0, N - 2)]
         #now we need to make sure that this guess hasn't been guessed before
         if previous_guesses:
             #this we'll keep generating new random guesses as long as we've guessed them before, loop will break with new guess
             while next_guess in previous_guesses:
-                next_guess = [random.randint(0, N - 1), random.randint(0, N - 1)]
+                next_guess = [random.randint(0, N - 2), random.randint(0, N - 2)]
 
     #now we'll deal with the situation that the AI's previous guess was right
     if hit == True:
@@ -75,7 +75,7 @@ def guess_prev_hit(board, previous_guesses, last_guess):
         last_guess (list with two elements): the AI's last guess, of the form [row, column]
     OUTPUTS (data types):
         next_guess (list with two elements): the AI's next guess. Will give guess in the form of [row, column].
-        '''
+    '''
     # Get length of board
     N = len(board)
 
@@ -94,7 +94,7 @@ def guess_prev_hit(board, previous_guesses, last_guess):
         next_guess = [last_guess[0] + movement[0], last_guess[1] + movement[1]]
 
         #checks if guess is valid (within the range of 0 to N-1)
-        if next_guess[0] >= 0 and next_guess[1] <= N - 1:
+        if next_guess[0] >= 0 and next_guess[1] <= N - 2:
             validGuess = True
 
     # return the next guess

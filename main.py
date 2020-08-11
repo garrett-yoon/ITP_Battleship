@@ -36,6 +36,9 @@ board_P2 = copy.deepcopy(board)
 board_P1.append(copy.deepcopy(ships))
 board_P2.append(copy.deepcopy(ships))
 
+
+
+
 if mode in [1,2]:
 
     #ship placement
@@ -57,7 +60,6 @@ if mode in [1,2]:
 # >>>>>>> Stashed changes
     while mode == 1:
 
-
         if board_P2=="WIN":
           print("YOU WIN!! Thanks for playing!")
           break
@@ -69,7 +71,9 @@ if mode in [1,2]:
         if board_P2 == "exit":
             print("Exiting Battleship.")
             break
-        board_P1 = comp_move(board_P1)
+        
+        #incorporating previous_guesses and hit into the AI's moves so that it uses its memory from the previous move
+        board_P1, previous_guesses, hit = comp_move(board_P1, previous_guesses , hit)
         print("-----------------------")
         if board_P1=="WIN":
           print("You Lost!! Try again next time!")
