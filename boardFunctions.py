@@ -15,6 +15,7 @@ def game_mode():
       print("Please enter a valid option (1, 2, or 3).")
     else:
       print("You selected game mode ", mode)
+      print("You can exit the game at any time by typing 'exit'. ")
       if mode not in [1,2,3]:
         print("Not a valid game mode, please try again.")
       break
@@ -32,6 +33,7 @@ def print_blank_board(board):
 
 
 def user_placement(board, ships):
+  x, y = '', ''
   for ship in ships.keys():
     valid = False
     while not valid:
@@ -39,6 +41,8 @@ def user_placement(board, ships):
       print("Placing a " + ship)
       x,y = get_coords()
       orientation = orient()
+      if x == "exit" or y == "exit" or orientation == "exit":
+          return "exit"
       valid = validate(board,ships[ship],x,y,orientation)
       if not valid:
         print("Invalid ship placement. Please try again.")
@@ -93,7 +97,7 @@ def validate(board, ship, x, y, orientation):
 def orient():
   while True:
     user_input = input("vertical or horizontal (v,h) ? ")
-    if user_input == "v" or user_input == "h":
+    if user_input == "v" or user_input == "h" or user_input == "exit":
       return user_input
     else:
       print("Invalid input. Please only enter v or h.")
@@ -101,6 +105,8 @@ def orient():
 def get_coords():
     while True:
         user_input = input("Please enter coordinates (row,col) ? ")
+        if user_input == "exit":
+            return user_input, user_input
         try:
             coords = user_input.split(",")
             if len(coords) != 2:
@@ -116,6 +122,8 @@ def get_coords():
             print(e)
 
 def make_move(board,x,y):
+    if x=="exit" or y=="exit":
+        return "exit"
     if board[x][y] == '-':
         return "miss"
     elif board[x][y] == '*' or board[x][y] == '$':
@@ -127,6 +135,8 @@ def user_move(board):
     while True:
         x,y = get_coords()
         res = make_move(board,x,y)
+        if res == "exit":
+            return res
 
         # Time delay with animation
         s = "FIRING!"
@@ -134,7 +144,6 @@ def user_move(board):
             print(s[i], sep=' ', end=' ', flush=True); sleep(0.5)
         print('\n')
         sleep(0.3)
-
 
         if res == "hit":
             print("Success! Hit at " + str(x+1) + "," + str(y+1))
