@@ -5,5 +5,5 @@ Battleship Project for ITP 2020 Summer NYU
 
 # Files  
 + main.py: main script to start game
-+ AI_opponent.py: contains functions for the AI player, to be called into main.yp  
++ AI_opponent.py: contains functions for the AI player, to be called into `boardFunctions.py`  
 + boardFunctions.py: contains functions regarding player boards and modifications to them 
