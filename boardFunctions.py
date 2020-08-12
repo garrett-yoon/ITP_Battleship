@@ -168,14 +168,14 @@ def comp_move(board, previous_guesses = [], hit = False):
     while True:
         #use "smart" AI to make the next guess and keep track of AI's previous guesses
         #this try/except part is just a test to see if hit is being properly passed into function for the AI
-        try:
-          print('last hit was {}'.format(hit))
-        except:
-          pass
+        #try:
+        #  print('last hit was {}'.format(hit))
+        #except:
+        #  pass
         #this incorporates the AI into making a guess
         next_guess, previous_guesses = AI_make_a_guess(board, previous_guesses, hit)
         #this is just for testing to see if the AI is using the previous guesses and updating the list
-        print(previous_guesses)
+        #print(previous_guesses)
         x, y = next_guess
         res = make_move(board,x,y)
         if res == "hit":
