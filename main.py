@@ -71,6 +71,7 @@ if mode in [1,2]:
           break
         # input("Hit ENTER to end turn.")
 
+    # Create 2nd player's board if mode 2 selected
     if mode == 2:
         print("-----------------------")
         print("-----------------------")

@@ -105,7 +105,7 @@ def orient():
 
 def get_coords():
     while True:
-        user_input = input("Please enter coordinates (row,col) ? ")
+        user_input = input("Please enter coordinates as row,col ? ")
         if user_input == "exit":
             return user_input, user_input
         try:
@@ -133,18 +133,20 @@ def make_move(board,x,y):
         return "hit"
 
 def user_move(board):
+    print("Make a guess!")
     while True:
         x,y = get_coords()
         res = make_move(board,x,y)
         if res == "exit":
             return res
 
-        # Time delay with animation
-        s = "FIRING!"
-        for i in range(len(s)):
-            print(s[i], sep=' ', end=' ', flush=True); sleep(0.5)
-        print('\n')
-        sleep(0.3)
+        if res != "try again":
+            # Time delay with animation
+            s = "FIRING!"
+            for i in range(len(s)):
+                print(s[i], sep=' ', end=' ', flush=True); sleep(0.5)
+            print('\n')
+            sleep(0.3)
 
         if res == "hit":
             print("Success! Hit at " + str(x+1) + "," + str(y+1))
