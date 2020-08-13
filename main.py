@@ -1,16 +1,7 @@
 from AI_opponent import AI_make_a_guess, guess_prev_hit
 from boardFunctions import *
 
-
-# comp_guesses = []
-
-# Testing if adjustment is correct
-# cur_guess, comp_guesses = AI_make_a_guess(board, comp_guesses, hit=False)
-# cur_guess, comp_guesses = AI_make_a_guess(board, comp_guesses, hit=True)
-
-# print(comp_guesses)
-
-
+# Create ships dictionary
 ships = {"Battleship":4,
              "Submarine":3,
              "Destroyer":3,
@@ -31,25 +22,24 @@ for i in range(n):
         board_row.append("-")
     board.append(board_row)
 
+# Create player boards
 board_P1 = copy.deepcopy(board)
 board_P2 = copy.deepcopy(board)
 board_P1.append(copy.deepcopy(ships))
 board_P2.append(copy.deepcopy(ships))
 
-
-
-
+# Check game mode
 if mode in [1,2]:
 
     #ship placement
     board_P1 = user_placement(board_P1,ships)
-# <<<<<<< Updated upstream
+
     # board_P2 = comp_placement(board_P2,ships)
     print("-----------------------")
     if board_P1 == "exit":
         mode = 3
         print("Exiting Battleship.")
-# =======
+
     if mode == 1:
         board_P2 = comp_placement(board_P2,ships)
         print("-----------------------")
@@ -57,7 +47,8 @@ if mode in [1,2]:
         previous_guesses = []
         #this is the Boolean that the AI will use to remember if it guessed correctly in its last move
         hit = False
-# >>>>>>> Stashed changes
+
+    # Loop for single player game
     while mode == 1:
 
         if board_P2=="WIN":
@@ -79,11 +70,14 @@ if mode in [1,2]:
           print("You Lost!! Try again next time!")
           break
         # input("Hit ENTER to end turn.")
+
     if mode == 2:
         print("-----------------------")
         print("-----------------------")
         print("Player 2 ship placement:")
         board_P2 = user_placement(board_P2, ships)
+
+    # Loop for 2 player game
     while mode == 2:
 
         # Player 1's turn. Print blank P2 board and P1 board.
@@ -119,7 +113,6 @@ if mode in [1,2]:
             break
         if board_P1 =="WIN":
             print("Player 2 Wins!")
-
 
 elif mode == 3:
     print("Exiting Battleship.")
